@@ -1,0 +1,103 @@
+
+import React, { useState, useEffect } from 'react';
+import SectionWrapper from './SectionWrapper';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const PHOTO_DELAY = 6000; // 6 seconds per slide
+
+const cristianPhotos = [
+  "https://picsum.photos/600/800?random=1",
+  "https://picsum.photos/600/800?random=3", 
+  "https://picsum.photos/600/800?random=5"
+];
+
+const salomePhotos = [
+  "https://picsum.photos/600/800?random=2",
+  "https://picsum.photos/600/800?random=4",
+  "https://picsum.photos/600/800?random=6"
+];
+
+const SlideshowCard = ({ photos, name, quote, delay = 0 }: { photos: string[], name: string, quote: string, delay?: number }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    // Offset the start time if needed
+    const timeout = setTimeout(() => {
+        const interval = setInterval(() => {
+            setIndex((prev) => (prev + 1) % photos.length);
+        }, PHOTO_DELAY);
+        return () => clearInterval(interval);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [photos.length, delay]);
+
+  return (
+    <div className="relative group">
+      <div className="absolute -inset-2 bg-gradient-to-r from-gold-600 to-amber-800 rounded-xl opacity-30 group-hover:opacity-60 blur transition duration-500"></div>
+      <div className="relative aspect-[3/4] overflow-hidden rounded-xl border-2 border-navy-800 bg-navy-900">
+        
+        <AnimatePresence mode='wait'>
+          <motion.img
+            key={index}
+            src={photos[index]}
+            alt={name}
+            initial={{ opacity: 0, scale: 1 }}
+            animate={{ opacity: 1, scale: 1.1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }} // Fade in/out duration
+            // The scaling happens over the full duration of the slide to create Ken Burns effect
+            style={{ 
+                position: 'absolute', 
+                top: 0, 
+                left: 0, 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover' 
+            }}
+          />
+        </AnimatePresence>
+
+        {/* Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 text-center z-10">
+          <h3 className="font-display text-2xl text-white mb-1 drop-shadow-md">{name}</h3>
+          <p className="font-serif text-gold-400 italic text-sm md:text-base drop-shadow-md">{quote}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Gallery: React.FC = () => {
+  return (
+    <SectionWrapper className="bg-navy-900 py-24">
+      <div className="max-w-6xl mx-auto px-4">
+         <div className="text-center mb-16">
+          <span className="h-[1px] w-20 bg-gold-500 inline-block align-middle mr-4"></span>
+          <h2 className="inline-block font-display text-2xl md:text-3xl text-white">Nuestros Momentos</h2>
+          <span className="h-[1px] w-20 bg-gold-500 inline-block align-middle ml-4"></span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-24 items-center max-w-4xl mx-auto">
+          {/* Cristian Slideshow */}
+          <SlideshowCard 
+            photos={cristianPhotos} 
+            name="Cristian Muñoz" 
+            quote='"El futuro pertenece a quienes creen en la belleza de sus sueños."'
+            delay={0}
+          />
+
+          {/* Salome Slideshow - Starts slightly later for visual interest */}
+          <SlideshowCard 
+            photos={salomePhotos} 
+            name="Salome Quelal" 
+            quote='"Cada final es un nuevo comienzo. Lista para brillar."'
+            delay={2500}
+          />
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+};
+
+export default Gallery;
