@@ -1,6 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import { registerServiceWorker } from './services/serviceWorkerRegistration';
+
+// Registra el Service Worker para cachear imágenes
+registerServiceWorker();
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

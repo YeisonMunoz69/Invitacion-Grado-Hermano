@@ -5,16 +5,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const PHOTO_DELAY = 6000; // 6 seconds per slide
 
+// URLs de imágenes desde Supabase Storage
+// Estrategia de cache:
+// - Headers configurados en Supabase: Cache-Control: public, max-age=31536000, immutable
+// - Service Worker cachea las imágenes localmente usando Cache API
+// - Las imágenes se sirven desde cache en recargas posteriores
 const cristianPhotos = [
-  "https://picsum.photos/600/800?random=1",
-  "https://picsum.photos/600/800?random=3", 
-  "https://picsum.photos/600/800?random=5"
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/1.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/2.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/3.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/4.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/5.webp"
 ];
 
 const salomePhotos = [
-  "https://picsum.photos/600/800?random=2",
-  "https://picsum.photos/600/800?random=4",
-  "https://picsum.photos/600/800?random=6"
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/6.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/7.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/8.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/9.webp",
+  "https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/10.webp"
 ];
 
 const SlideshowCard = ({ photos, name, quote, delay = 0 }: { photos: string[], name: string, quote: string, delay?: number }) => {
@@ -42,11 +51,17 @@ const SlideshowCard = ({ photos, name, quote, delay = 0 }: { photos: string[], n
             key={index}
             src={photos[index]}
             alt={name}
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0, scale: 1 }}
             animate={{ opacity: 1, scale: 1.1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }} // Fade in/out duration
             // The scaling happens over the full duration of the slide to create Ken Burns effect
+            // Optimizaciones de carga:
+            // - loading="lazy": carga diferida de imágenes fuera del viewport
+            // - decoding="async": decodificación asíncrona para no bloquear el render
+            // - Service Worker cachea automáticamente las imágenes descargadas
             style={{ 
                 position: 'absolute', 
                 top: 0, 

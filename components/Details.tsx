@@ -59,7 +59,7 @@ const Details: React.FC = () => {
                    <div className="w-16 h-16 bg-navy-800 rounded-full flex items-center justify-center mb-6 border border-gold-500/30">
                       <MapPin className="text-gold-500 w-8 h-8 animate-bounce" />
                    </div>
-                   <h3 className="font-display text-2xl text-white mb-2">Casa de Familia Muñoz</h3>
+                   <h3 className="font-display text-2xl text-white mb-2">Casa de Familia Muñoz Gómez</h3>
                    <p className="font-sans text-gray-300 mb-4">Vereda Las Huacas<br/>Timbio, Cauca</p>
                    <a 
                       href="https://www.google.com/maps/search/?api=1&query=2.344889,-76.693111"
