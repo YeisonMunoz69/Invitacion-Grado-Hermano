@@ -102,12 +102,12 @@ const Gallery: React.FC = () => {
             delay={0}
           />
 
-          {/* Salome Slideshow - Starts slightly later for visual interest */}
+          {/* Salome Slideshow*/}
           <SlideshowCard 
             photos={salomePhotos} 
             name="Salome Quelal" 
             quote='"Cada final es un nuevo comienzo. Lista para brillar."'
-            delay={2500}
+            delay={0}
           />
         </div>
       </div>

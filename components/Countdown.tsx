@@ -63,10 +63,10 @@ const Countdown: React.FC = () => {
   return (
     <SectionWrapper className="bg-navy-900 py-16 md:py-24 relative overflow-hidden">
        {/* Fondo decorativo sutil */}
-       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+       {/* <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
           <div className="absolute -top-20 -left-20 w-96 h-96 bg-gold-600 rounded-full blur-[100px]"></div>
           <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-navy-600 rounded-full blur-[100px]"></div>
-       </div>
+       </div> */}
 
        {/* Separador ornamental superior */}
        <div className="w-full flex justify-center mb-12 opacity-60">

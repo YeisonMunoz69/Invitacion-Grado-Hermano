@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://picsum.photos/1920/1080?grayscale&blur=2" 
+          src="https://eceokylztrtzfdjsyikh.supabase.co/storage/v1/object/public/fotos/SAP.webp" 
           alt="Background" 
           className="w-full h-full object-cover opacity-30"
         />

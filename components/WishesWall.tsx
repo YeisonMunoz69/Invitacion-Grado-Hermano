@@ -65,6 +65,7 @@ const WishesWall: React.FC<Props> = ({ isOpen, onClose }) => {
   const marqueeItems = wishes.length > 0 ? [...wishes, ...wishes, ...wishes] : [];
 
   return (
+    
     <AnimatePresence>
       {isOpen && (
         <motion.div 
@@ -73,6 +74,7 @@ const WishesWall: React.FC<Props> = ({ isOpen, onClose }) => {
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex flex-col bg-navy-900/95 backdrop-blur-xl overflow-hidden"
         >
+          
           {/* Header */}
           <div className="flex-none p-6 md:p-8 flex justify-between items-center z-10 bg-gradient-to-b from-navy-900 via-navy-900/90 to-transparent">
             <div>
@@ -83,9 +85,27 @@ const WishesWall: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
             <button 
               onClick={onClose}
-              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 flex items-center justify-center text-white transition-all shadow-lg backdrop-blur-sm group"
+              className="
+                w-12 h-12 rounded-full
+                bg-gradient-to-br from-gold-600/20 via-gold-500/15 to-gold-600/20
+                border border-white/20
+                shadow-[inset_-3px_-3px_8px_rgba(255,255,255,0.1),inset_3px_3px_8px_rgba(0,0,0,0.3),0_4px_12px_rgba(0,0,0,0.2)]
+                active:shadow-[inset_2px_2px_6px_rgba(0,0,0,0.4),inset_-2px_-2px_6px_rgba(255,255,255,0.05)]
+                hover:shadow-[inset_-4px_-4px_10px_rgba(255,255,255,0.15),inset_4px_4px_10px_rgba(0,0,0,0.4),0_6px_16px_rgba(0,0,0,0.3)]
+                flex items-center justify-center text-white
+                transition-all duration-300 ease-out
+                hover:scale-[1.05] active:scale-[0.95]
+                backdrop-blur-sm group
+                animate-pulse hover:animate-none
+              "
             >
-              <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+              <X size={24} className="group-hover:rotate-90 transition-transform duration-300 relative z-10" />
+              
+              {/* Brillo sutil al hover */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Resplandor exterior pulsante */}
+              <div className="absolute -inset-1 rounded-full bg-white/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 animate-ping"></div>
             </button>
           </div>
 
@@ -110,7 +130,7 @@ const WishesWall: React.FC<Props> = ({ isOpen, onClose }) => {
                   x: {
                     repeat: Infinity,
                     repeatType: "loop",
-                    duration: Math.max(40, wishes.length * 5), // Duración dinámica basada en cantidad
+                    duration: Math.max(60, wishes.length * 20), // Duración duplicada para velocidad más lenta (mitad de velocidad)
                     ease: "linear",
                   }
                 }}
@@ -189,8 +209,8 @@ const WishesWall: React.FC<Props> = ({ isOpen, onClose }) => {
           
           {/* Footer instruction */}
           <div className="pb-8 text-center z-10">
-             <p className="text-white/20 text-xs uppercase tracking-[0.3em] animate-pulse">
-                {wishes.length > 0 ? "Pausa al tocar" : ""}
+             <p className="text-white/60 text-xs uppercase tracking-[0.5em] animate-pulse">
+                {wishes.length > 0 ? "Mensajes de Personas Especiales" : ""}
              </p>
           </div>
         </motion.div>

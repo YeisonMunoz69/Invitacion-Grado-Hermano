@@ -69,11 +69,15 @@ const RSVP: React.FC<Props> = ({ onOpenWall }) => {
   };
 
   return (
-    <SectionWrapper id="wishes" className="bg-navy-800 relative py-24 overflow-visible">
+    <SectionWrapper id="wishes" className="bg-navy-900 relative py-24 overflow-visible">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl animate-pulse"></div>
+        {/* <div className="absolute -top-24 -right-24 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl animate-pulse"></div> */}
         <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-navy-600/20 rounded-full blur-3xl"></div>
       </div>
+
+      {/* Decorative Border */}
+      <div className="absolute top-4 left-4 right-4 bottom-4 border border-gold-500/30 z-10 hidden md:block pointer-events-none"></div>
+      <div className="absolute top-6 left-6 right-6 bottom-6 border border-gold-500/10 z-10 hidden md:block pointer-events-none"></div>
 
       <div className="max-w-5xl mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
@@ -100,26 +104,31 @@ const RSVP: React.FC<Props> = ({ onOpenWall }) => {
                 Cada mensaje es un tesoro que guardaremos con mucho amor en esta nueva etapa.
               </p>
               
-              {/* Botón Neumorfismo Animado */}
+              {/* Botón Neumorfismo Animado Dorado */}
               <button 
                 onClick={onOpenWall}
                 className="
                   group relative w-full lg:w-auto inline-flex items-center justify-center gap-4
                   px-10 py-5 rounded-full
-                  bg-navy-800 text-gold-400
-                  font-display text-lg tracking-widest uppercase font-bold
-                  border border-gold-500/10
-                  shadow-[-8px_-8px_20px_rgba(255,255,255,0.05),8px_8px_20px_rgba(0,0,0,0.5)]
-                  active:shadow-[inset_4px_4px_10px_rgba(0,0,0,0.5),inset_-4px_-4px_10px_rgba(255,255,255,0.02)]
-                  hover:text-gold-300 transition-all duration-300 ease-out
-                  hover:scale-[1.02] active:scale-[0.98]
+                  bg-gradient-to-br from-gold-600/20 via-gold-500/15 to-gold-600/20
+                  text-gold-300 font-display text-lg tracking-widest uppercase font-bold
+                  border border-gold-500/30
+                  shadow-[inset_-4px_-4px_12px_rgba(217,119,6,0.3),inset_4px_4px_12px_rgba(0,0,0,0.4),0_8px_24px_rgba(217,119,6,0.2)]
+                  active:shadow-[inset_4px_4px_12px_rgba(0,0,0,0.5),inset_-4px_-4px_12px_rgba(217,119,6,0.1)]
+                  hover:shadow-[inset_-6px_-6px_16px_rgba(217,119,6,0.4),inset_6px_6px_16px_rgba(0,0,0,0.5),0_12px_32px_rgba(217,119,6,0.3)]
+                  hover:text-gold-200 transition-all duration-300 ease-out
+                  hover:scale-[1.03] active:scale-[0.97]
+                  animate-pulse hover:animate-none
                 "
               >
                 <span className="relative z-10">Leer los Deseos</span>
                 <BookOpen className="group-hover:rotate-12 transition-transform duration-300 relative z-10" size={22} />
                 
-                {/* Brillo sutil al hover */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-gold-500/0 via-gold-500/5 to-gold-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Brillo dorado animado */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-gold-500/0 via-gold-500/20 to-gold-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Resplandor exterior */}
+                <div className="absolute -inset-1 rounded-full bg-gold-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
               </button>
             </div>
           </div>

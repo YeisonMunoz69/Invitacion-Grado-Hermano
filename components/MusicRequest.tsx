@@ -108,7 +108,7 @@ const MusicRequest: React.FC = () => {
   return (
     <SectionWrapper className="bg-navy-900 border-t border-navy-800 py-16 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/5 rounded-full blur-3xl"></div>
+      {/* <div className="absolute top-0 right-0 w-64 h-64 bg-gold-600/5 rounded-full blur-3xl"></div> */}
 
       <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
         <div className="inline-block relative mb-6">
