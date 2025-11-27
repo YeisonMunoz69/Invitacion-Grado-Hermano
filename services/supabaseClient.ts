@@ -1,6 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://eceokylztrtzfdjsyikh.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZW9reWx6dHJ0emZkanN5aWtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQxODEyMDIsImV4cCI6MjA3OTc1NzIwMn0.Gb7DgD6KvJQQ8BnCe54yPzSJeohbZoo82HhUiISmGWU';
+// Obtener las credenciales desde variables de entorno
+// Nota: En Vite, las variables de entorno deben tener el prefijo VITE_ para ser expuestas
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string) || '';
+const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string) || '';
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Error: Las variables de entorno VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY deben estar configuradas');
+  console.error('Por favor, crea un archivo .env en la raíz del proyecto con estas variables.');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
