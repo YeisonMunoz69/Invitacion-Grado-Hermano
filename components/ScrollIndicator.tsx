@@ -37,7 +37,7 @@ const ScrollIndicator: React.FC = () => {
         >
           <div className="flex flex-col items-center gap-1 bg-navy-900/40 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-500/20 shadow-lg">
             <span className="text-[10px] uppercase tracking-[0.2em] text-gold-400 font-sans font-medium">
-              Desplázate
+              Baja, Hay más...
             </span>
             <motion.div
               animate={{ y: [0, 5, 0] }}

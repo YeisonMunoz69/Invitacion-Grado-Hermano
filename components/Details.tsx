@@ -15,10 +15,47 @@ const DetailCard = ({ icon: Icon, title, desc, subDesc, className = "" }: any) =
 );
 
 const Details: React.FC = () => {
-  const mapUrl = "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3986.195029497576!2d-76.693111!3d2.344889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMsKwMjAnNDEuNiJOIDc2wrQ0MSczNS4yIlc!5e0!3m2!1sen!2sco!4v1709230000000!5m2!1sen!2sco";
+  // Google Maps Embed with marker showing exact location
+  const mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.195029497576!2d-76.693111!3d2.344889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMjAnNDEuNiJOIDc2wrQ0MSczNS4yIlc!5e0!3m2!1sen!2sco!4v1709230000000!5m2!1sen!2sco";
 
   return (
     <SectionWrapper id="details" className="bg-navy-900 relative">
+      <style>{`
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7),
+                        0 0 20px 5px rgba(217, 119, 6, 0.3);
+            transform: scale(1);
+          }
+          50% {
+            box-shadow: 0 0 0 10px rgba(217, 119, 6, 0),
+                        0 0 30px 10px rgba(217, 119, 6, 0.5);
+            transform: scale(1.05);
+          }
+        }
+        @keyframes shimmer {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+        .gps-button-animated {
+          animation: pulse-glow 2s ease-in-out infinite;
+          background: linear-gradient(90deg, 
+            rgba(217, 119, 6, 0.1) 0%, 
+            rgba(217, 119, 6, 0.3) 50%, 
+            rgba(217, 119, 6, 0.1) 100%);
+          background-size: 200% 100%;
+          animation: pulse-glow 2s ease-in-out infinite,
+                     shimmer 3s linear infinite;
+        }
+        .gps-button-animated:hover {
+          animation: none;
+          box-shadow: 0 0 25px 8px rgba(217, 119, 6, 0.6);
+        }
+      `}</style>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display text-gold-400 tracking-widest uppercase text-sm mb-2">Detalles del Evento</h2>
@@ -29,13 +66,13 @@ const Details: React.FC = () => {
           {/* Main Info Cards */}
           <DetailCard 
             icon={Calendar} 
-            title="La Fecha" 
+            title="Fecha" 
             desc="Sabado, 6 de Diciembre" 
             subDesc="2025" 
           />
           <DetailCard 
             icon={Clock} 
-            title="La Hora" 
+            title="Hora" 
             desc="Recepción: 6:00 PM" 
             subDesc="Sientete libre de llegar Puntual o Tarde" 
           />
@@ -65,12 +102,12 @@ const Details: React.FC = () => {
                       href="https://www.google.com/maps/search/?api=1&query=2.344889,-76.693111"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-6 py-2 border border-gold-500 text-gold-500 text-xs uppercase tracking-widest hover:bg-gold-500 hover:text-navy-900 transition-colors rounded-sm"
+                      className="gps-button-animated px-6 py-3 border-2 border-gold-500 text-gold-500 text-xs uppercase tracking-widest hover:bg-gold-500 hover:text-navy-900 transition-all duration-300 rounded-sm font-semibold relative overflow-hidden"
                    >
-                      Abrir en GPS
+                      <span className="relative z-10">Abrir en GPS</span>
                    </a>
                 </div>
-                <div className="h-64 md:h-auto md:w-2/3 relative grayscale group-hover:grayscale-0 transition-all duration-1000">
+                <div className="h-64 md:h-auto md:w-2/3 relative">
                   <iframe 
                     src={mapUrl}
                     width="100%" 
